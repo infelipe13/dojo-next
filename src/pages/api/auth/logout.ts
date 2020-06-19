@@ -9,10 +9,8 @@ export default async function handle(
   try {
     // Remove token cookie.
     removeTokenCookie(res);
-    // Redirect to sign in.
-    res.writeHead(302, { Location: '/' });
     // Provide no response.
-    res.end();
+    res.status(200).end();
   } catch ({ message }) {
     res.status(500).send({ message });
   }

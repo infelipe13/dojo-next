@@ -16,10 +16,8 @@ export default async function handle(
     const token = await encryptSession(session);
     // Set token cookie.
     setTokenCookie(res, token);
-    // ???
-    const user = {};
 
-    res.status(200).send({ user });
+    res.status(200).end();
   } catch ({ message }) {
     res.status(500).send({ message });
   }

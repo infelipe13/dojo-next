@@ -9,8 +9,7 @@ export const withProtection = (
   const session = await getSession(req);
 
   if (!session) {
-    res.setHeader('location', '/');
-    res.statusCode = 302;
+    res.writeHead(302, { Location: '/' });
     res.end();
 
     return { props: {} };

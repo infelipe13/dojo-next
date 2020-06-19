@@ -4,10 +4,10 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 const MAX_AGE = 8 * 60 * 60; // 8h.
-const TOKEN_NAME = 'token'; // :)
+const TOKEN_NAME = 'token';
 
-export const parseCookie = (req: IncomingMessage | NextApiRequest) => {
-  // No need to parse when route is API.
+const parseCookie = (req: IncomingMessage | NextApiRequest) => {
+  // No need to parse cookie if sent from the client.
   if ((req as NextApiRequest).cookies) {
     return (req as NextApiRequest).cookies;
   }

@@ -3,9 +3,10 @@ import { useRouter } from 'next/router';
 
 import { Container, Div100Vh } from 'src/components';
 import { withProtection } from 'src/hofs';
+import { useUser } from 'src/hooks';
 
 type User = {
-  name: string;
+  fullName: string;
 };
 
 type Props = {
@@ -14,6 +15,7 @@ type Props = {
 
 export default function Profile({ user }: Props) {
   const router = useRouter();
+  // const user = useUser();
 
   return (
     <Div100Vh>
@@ -24,7 +26,7 @@ export default function Profile({ user }: Props) {
           onClick={async () => {
             await fetch('/api/auth/logout');
 
-            router.push('/');
+            router.replace('/');
           }}
         >
           Logout
@@ -35,3 +37,12 @@ export default function Profile({ user }: Props) {
 }
 
 export const getServerSideProps: GetServerSideProps = withProtection();
+
+// export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+//   const result = await fetch('http://localhost:3000/api/user', {
+//     headers: { cookie: req.headers.cookie! },
+//   });
+//   const { user } = await result.json();
+
+//   return { props: { user } };
+// };

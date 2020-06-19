@@ -15,7 +15,7 @@ export default function Login() {
           onClick={async () => {
             await fetch('/api/auth/login');
 
-            router.push('/profile');
+            router.replace('/profile');
           }}
         >
           Authenticate
@@ -29,8 +29,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
   const session = await getSession(req);
 
   if (session) {
-    res.setHeader('location', '/profile');
-    res.statusCode = 302;
+    res.writeHead(302, { Location: '/profile' });
     res.end();
   }
 

@@ -4,7 +4,6 @@ import { NextApiRequest } from 'next';
 
 import { getTokenCookie } from 'src/utils/auth/authCookies';
 
-// :)
 const TOKEN_SECRET = '12345678123456781234567812345678';
 
 export const encryptSession = (session: any) => {

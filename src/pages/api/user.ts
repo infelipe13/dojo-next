@@ -9,7 +9,13 @@ export default async function handle(
   try {
     const session = await getSession(req);
 
-    res.status(200).json({ user: session || null });
+    if (!session) {
+      res.status(200).json({ user: null });
+
+      return;
+    }
+
+    res.status(200).json({ user: session });
   } catch ({ message }) {
     res.status(500).send({ message });
   }
